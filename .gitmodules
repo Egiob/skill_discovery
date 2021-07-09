@@ -1,0 +1,3 @@
+[submodule "stable-baselines3-diayn"]
+	path = DiversityIsAllYouNeed-SB3
+	url = https://github.com/Egiob/DiversityIsAllYouNeed-SB3
