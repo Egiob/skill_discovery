@@ -1,0 +1,41 @@
+DIAYN:
+  device: cuda
+  env_id : null
+  prior_type: categorical-uniform
+  n_skills: 1
+  buffer_size: 1e6
+  ent_coef: 0.1
+  seed: 0
+  steps: 1e7
+  train_freq: [1,"episode"]
+  gradient_steps: 20
+  learning_starts: 1000
+  batch_size: 256
+  tau: 0.005
+  gamma: 0.99
+
+  discriminator:
+    input: all
+    net_arch: [30,30]
+
+  combined_rewards:
+    enable: True
+    smerl: null
+    eps: null
+    beta: 0.
+
+  policy:
+    class: MlpPolicy
+    net_arch: [1024, 1024]
+    optimizer: SGD
+    momentum: 0.9
+    lr_schedule:
+      type: multi-step
+      values: [0.001,0.0001]
+      milestones: [0.5]
+
+  unity:
+    build_path: ../../../builds/Crawler_18_train_windows_5000
+    time_scale: 20
+    decision_request: 5
+    worker_id: 13
