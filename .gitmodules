@@ -1,3 +1,7 @@
 [submodule "stable-baselines3-diayn"]
 	path = DiversityIsAllYouNeed-SB3
 	url = https://github.com/Egiob/DiversityIsAllYouNeed-SB3
+[submodule "ml-agents"]
+	path = ml-agents
+	url = https://github.com/Unity-Technologies/ml-agents
+	branch = release_18_branch
