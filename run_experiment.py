@@ -51,13 +51,17 @@ def run_exp(cfg : DictConfig) -> None:
     policy_optimizer_name = DIAYN_cfg['policy']['optimizer']
     lr_schedule_type = DIAYN_cfg['policy']['lr_schedule']['type']
     
+
+    
+    
+    optimizer_kwargs = {}
     assert policy_optimizer_name in ['Adam', 'SGD']
     if policy_optimizer_name == 'Adam':
         policy_optim_class = torch.optim.Adam
     elif policy_optimizer_name == 'SGD':
         policy_optim_class = torch.optim.SGD
         momentum = DIAYN_cfg['policy']['momentum']
-    optimizer_kwargs = {'momentum': momentum}
+        optimizer_kwargs['momentum'] =  momentum
     policy_kwargs = {'optimizer_kwargs':optimizer_kwargs,
                      'optimizer_class' : policy_optim_class}
     assert lr_schedule_type in ['constant', 'linear', 'multi-step']
@@ -95,7 +99,6 @@ def run_exp(cfg : DictConfig) -> None:
         
     env = UnityEnvironment(build_path,no_graphics=True,worker_id=worker_id,side_channels=[channel])
     gym_env = UnityToGymWrapper(env, allow_multiple_obs=False)
-    print(type(ent_coef))
     model = DIAYN(policy=policy_class,
               env=gym_env,
               prior=prior,
